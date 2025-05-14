@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Психолог | Ваше имя</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --text-light: #ecf0f1;
+            --text-muted: #bdc3c7;
+            --bg-dark: #2c3e50;
+            --glass-white: rgba(255, 255, 255, 0.1);
+            --glass-dark: rgba(0, 0, 0, 0.2);
+            --border-radius: 8px;
+            --box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* Шапка */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(44, 62, 80, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-light);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .cta-button {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .cta-button:hover {
+            background: #2980b9;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero блок */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1491897554428-130a60dd4757?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 2rem;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-color);
+        }
+
+        /* Секции */
+        .section {
+            padding: 5rem 5%;
+            position: relative;
+            background: var(--primary-color);
+        }
+
+        .section-alt {
+            background: var(--secondary-color);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        /* Преимущества */
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--box-shadow);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card p {
+            color: var(--text-muted);
+        }
+
+        /* Обо мне */
+        .about {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about h3 {
+            font-size: 1.8rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--accent-color);
+        }
+
+        .about p {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .features-list li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 2rem;
+            color: var(--text-muted);
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Методы работы (новый блок) */
+        .methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .method-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--box-shadow);
+        }
+
+        .method-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .method-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .method-card p {
+            color: var(--text-muted);
+        }
+
+        /* Статьи и публикации (новый блок) */
+        .articles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .article-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--box-shadow);
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .article-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .article-card:hover .article-image img {
+            transform: scale(1.05);
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-date {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-card p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .article-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .article-link:hover {
+            color: #2980b9;
+        }
+
+        .article-link i {
+            margin-left: 0.5rem;
+        }
+
+        /* Отзывы */
+        .testimonials-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 2rem;
+            padding: 2rem 0;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .testimonials-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        .testimonial-card {
+            min-width: 350px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            scroll-snap-align: start;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--box-shadow);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-right: 1rem;
+            border: 2px solid var(--accent-color);
+        }
+
+        .testimonial-author {
+            flex: 1;
+        }
+
+        .testimonial-author h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            color: var(--text-light);
+        }
+
+        .testimonial-rating {
+            color: gold;
+            font-size: 1rem;
+        }
+
+        .testimonial-text {
+            color: var(--text-muted);
+            font-style: italic;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .testimonial-text::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -0.5rem;
+            font-size: 3rem;
+            color: var(--accent-color);
+            opacity: 0.3;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-nav button {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: var(--text-light);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .testimonial-nav button:hover {
+            background: var(--accent-color);
+        }
+
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .testimonial-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .testimonial-dot.active {
+            background: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        /* Цены */
+        .pricing-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-card.highlight {
+            border: 1px solid var(--accent-color);
+            position: relative;
+        }
+
+        .pricing-card-header {
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .pricing-card-header h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pricing-card-body {
+            padding: 1.5rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            color: var(--text-muted);
+        }
+
+        .pricing-features i {
+            margin-right: 0.7rem;
+            color: var(--accent-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .pricing-button {
+            display: inline-block;
+            width: 100%;
+            padding: 0.8rem;
+            text-align: center;
+            background: var(--accent-color);
+            color: white;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .pricing-button:hover {
+            background: #2980b9;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+        }
+
+        /* FAQ */
+        .faq {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--box-shadow);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-question h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .faq-icon {
+            transition: var(--transition);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            padding: 0 1.5rem;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-answer-inner {
+            padding: 1.5rem 0;
+            color: var(--text-muted);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Подвал */
+        footer {
+            background: #1a252f;
+            padding: 3rem 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+
+        .footer-contact p {
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-contact i {
+            margin-right: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .footer-social a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 1.5rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            outline: none;
+        }
+
+        .newsletter-button {
+            padding: 0 1.5rem;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-button:hover {
+            background: #2980b9;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Адаптация под мобильные устройства */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 8rem;
+            }
+
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 3rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .about {
+                flex-direction: column;
+            }
+
+            .about-image {
+                order: -1;
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(44, 62, 80, 0.95);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+                padding: 2rem 0;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .testimonial-card {
+                min-width: 280px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .benefits, .methods, .articles {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <a href="#" class="logo">
+            <img src="https://via.placeholder.com/40" alt="Логотип">
+            <span>Ваше имя</span>
+        </a>
+        
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#about">Обо мне</a></li>
+            <li><a href="#methods">Методы</a></li>
+            <li><a href="#services">Подход</a></li>
+            <li><a href="#articles">Статьи</a></li>
+            <li><a href="#testimonials">Отзывы</a></li>
+            <li><a href="#pricing">Цены</a></li>
+            <li><a href="#contact">Контакты</a></li>
+            <li><a href="#" class="cta-button">Записаться</a></li>
+        </ul>
+    </header>
+
+    <!-- Hero блок -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Профессиональная психологическая помощь</h1>
+            <p>Индивидуальный подход к каждому клиенту с многолетним опытом работы. Конфиденциальность и понимание в сложных жизненных ситуациях.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">Записаться на консультацию</a>
+                <a href="#about" class="btn btn-secondary">Узнать больше</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://via.placeholder.com/400x500" alt="Ваше фото">
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section class="section" id="services">
+        <h2 class="section-title">Мой подход</h2>
+        <div class="benefits">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Эмпатия</h3>
+                <p>Глубокое понимание ваших чувств и переживаний. Создаю безопасное пространство для самовыражения.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Профессионализм</h3>
+                <p>15 лет практики и постоянное обучение. Использую научно обоснованные методы психотерапии.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3>Конфиденциальность</h3>
+                <p>Полная анонимность и защита ваших данных. Все сессии строго конфиденциальны.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Обо мне -->
+    <section class="section section-alt" id="about">
+        <div class="about">
+            <div class="about-content">
+                <h2>Обо мне</h2>
+                <p>Я - профессиональный психолог с многолетним опытом работы в различных областях психологической помощи. Моя миссия - помогать людям находить внутреннюю гармонию и решать жизненные трудности.</p>
+                
+                <h3>Образование и квалификация</h3>
+                <ul class="features-list">
+                    <li>Кандидат психологических наук</li>
+                    <li>Сертифицированный специалист по когнитивно-поведенческой терапии</li>
+                    <li>Опыт работы более 15 лет</li>
+                    <li>Член профессиональной ассоциации психологов</li>
+                </ul>
+                
+                <h3>Направления работы</h3>
+                <p>Работаю с тревожными расстройствами, депрессией, проблемами в отношениях, кризисами и другими психологическими трудностями.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://via.placeholder.com/500x400" alt="О психологе">
+            </div>
+        </div>
+    </section>
+
+    <!-- Методы работы (новый блок) -->
+    <section class="section" id="methods">
+        <h2 class="section-title">Методы работы</h2>
+        <div class="methods">
+            <div class="method-card">
+                <h3>Когнитивно-поведенческая терапия</h3>
+                <p>Научно обоснованный подход, помогающий изменить негативные мысли и поведенческие паттерны, которые вызывают эмоциональные проблемы.</p>
+            </div>
+            <div class="method-card">
+                <h3>Гештальт-терапия</h3>
+                <p>Фокус на осознавании "здесь и сейчас", завершении незавершенных ситуаций и развитии целостности личности.</p>
+            </div>
+            <div class="method-card">
+                <h3>Психодинамический подход</h3>
+                <p>Исследование бессознательных процессов и их влияния на текущие мысли, чувства и поведение.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Статьи и публикации (новый блок) -->
+    <section class="section section-alt" id="articles">
+        <h2 class="section-title">Статьи и публикации</h2>
+        <div class="articles">
+            <div class="article-card">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Статья 1">
+                </div>
+                <div class="article-content">
+                    <div class="article-date">15 мая 2023</div>
+                    <h3>Как справляться с тревогой</h3>
+                    <p>Практические советы по управлению тревожными состояниями в повседневной жизни.</p>
+                    <a href="#" class="article-link">Читать <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="article-card">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Статья 2">
+                </div>
+                <div class="article-content">
+                    <div class="article-date">2 апреля 2023</div>
+                    <h3>Построение здоровых отношений</h3>
+                    <p>Как создать и поддерживать гармоничные отношения в паре и с окружающими.</p>
+                    <a href="#" class="article-link">Читать <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="article-card">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1545665277-5937489579f2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Статья 3">
+                </div>
+                <div class="article-content">
+                    <div class="article-date">10 марта 2023</div>
+                    <h3>Стресс на работе: как сохранить баланс</h3>
+                    <p>Эффективные стратегии управления профессиональным стрессом и профилактика выгорания.</p>
+                    <a href="#" class="article-link">Читать <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="section" id="testimonials">
+        <h2 class="section-title">Отзывы клиентов</h2>
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="https://via.placeholder.com/70x70" alt="Клиент 1" class="testimonial-avatar">
+                    <div class="testimonial-author">
+                        <h4>Анна К.</h4>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="testimonial-text">Очень благодарна за помощь в сложный период жизни. Профессиональный подход и душевное тепло помогли мне справиться с тревогой и найти новые силы.</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="https://via.placeholder.com/70x70" alt="Клиент 2" class="testimonial-avatar">
+                    <div class="testimonial-author">
+                        <h4>Михаил С.</h4>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="testimonial-text">После нескольких сессий почувствовал значительные изменения в своем состоянии. Специалист помог разобраться в причинах проблем и найти пути их решения.</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="https://via.placeholder.com/70x70" alt="Клиент 3" class="testimonial-avatar">
+                    <div class="testimonial-author">
+                        <h4>Елена П.</h4>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="testimonial-text">Работа с психологом помогла мне улучшить отношения в семье и на работе. Рекомендую всем, кто столкнулся с похожими трудностями.</p>
+            </div>
+        </div>
+        <div class="testimonial-nav">
+            <button class="testimonial-prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="testimonial-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="testimonial-dots">
+            <div class="testimonial-dot active"></div>
+            <div class="testimonial-dot"></div>
+            <div class="testimonial-dot"></div>
+        </div>
+    </section>
+
+    <!-- Цены -->
+    <section class="section section-alt" id="pricing">
+        <h2 class="section-title">Стоимость услуг</h2>
+        <div class="pricing-vertical">
+            <div class="pricing-card">
+                <div class="pricing-card-header">
+                    <h3>Индивидуальная консультация</h3>
+                    <div class="pricing-price">3 500 ₽</div>
+                </div>
+                <div class="pricing-card-body">
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-clock"></i> 60 минут</li>
+                        <li><i class="fas fa-user"></i> Личная встреча или онлайн</li>
+                        <li><i class="fas fa-search"></i> Анализ проблемы</li>
+                        <li><i class="fas fa-lightbulb"></i> Практические рекомендации</li>
+                    </ul>
+                    <a href="#contact" class="pricing-button">Записаться</a>
+                </div>
+            </div>
+
+            <div class="pricing-card highlight">
+                <div class="pricing-card-header">
+                    <h3>Курс из 5 сессий</h3>
+                    <div class="pricing-price">15 000 ₽</div>
+                    <div class="pricing-badge">Выгодно</div>
+                </div>
+                <div class="pricing-card-body">
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-clock"></i> 5 сессий по 60 минут</li>
+                        <li><i class="fas fa-chart-line"></i> Глубокая проработка</li>
+                        <li><i class="fas fa-tasks"></i> Домашние задания</li>
+                        <li><i class="fas fa-envelope"></i> Поддержка между сессиями</li>
+                        <li><i class="fas fa-percentage"></i> Экономия 15%</li>
+                    </ul>
+                    <a href="#contact" class="pricing-button">Записаться</a>
+                </div>
+            </div>
+
+            <div class="pricing-card">
+                <div class="pricing-card-header">
+                    <h3>Семейная консультация</h3>
+                    <div class="pricing-price">5 000 ₽</div>
+                </div>
+                <div class="pricing-card-body">
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-clock"></i> 90 минут</li>
+                        <li><i class="fas fa-users"></i> Для пар или семьи</li>
+                        <li><i class="fas fa-heart"></i> Анализ отношений</li>
+                        <li><i class="fas fa-handshake"></i> Поиск решений</li>
+                    </ul>
+                    <a href="#contact" class="pricing-button">Записаться</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq-section">
+        <h2 class="section-title">Частые вопросы</h2>
+        <div class="faq">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Как проходит первая консультация?</h3>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Первая консультация - это знакомство и сбор информации. Мы обсудим вашу ситуацию, определим цели работы и наметим план дальнейших сессий. Это безопасное пространство, где вы можете говорить обо всем, что вас беспокоит.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Как долго длится терапия?</h3>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Длительность терапии зависит от сложности проблемы и ваших целей. Некоторым клиентам достаточно 3-5 сессий, другим требуется более длительная работа. Мы регулярно оцениваем прогресс и корректируем план по мере необходимости.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Гарантирован ли результат?</h3>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Результат зависит от многих факторов, включая вашу вовлеченность в процесс и готовность к изменениям. Я гарантирую профессиональный подход и применение эффективных методик, но успех терапии - это наша совместная работа.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Можно ли проводить консультации онлайн?</h3>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Да, я провожу консультации как очно, так и онлайн через Zoom или Skype. Онлайн-формат так же эффективен, как и личные встречи, и имеет преимущество в виде экономии времени на дорогу.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>О психологе</h3>
+                <p>Профессиональная психологическая помощь с индивидуальным подходом к каждому клиенту.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Быстрые ссылки</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#about">Обо мне</a></li>
+                    <li><a href="#methods">Методы</a></li>
+                    <li><a href="#services">Подход</a></li>
+                    <li><a href="#articles">Статьи</a></li>
+                    <li><a href="#testimonials">Отзывы</a></li>
+                    <li><a href="#pricing">Цены</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Контакты</h3>
+                <div class="footer-contact">
+                    <p><i class="fas fa-phone-alt"></i> +7 (XXX) XXX-XX-XX</p>
+                    <p><i class="fas fa-envelope"></i> example@psychologist.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Психологическая, 15</p>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Подписаться на новости</h3>
+                <p>Получайте полезные статьи и анонсы мероприятий.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Ваш email" class="newsletter-input" required>
+                    <button type="submit" class="newsletter-button"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Психолог Ваше имя. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Активное меню при скролле
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.nav-links a').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // FAQ аккордеон
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+                
+                // Закрываем другие открытые вопросы
+                faqQuestions.forEach(otherQuestion => {
+                    if (otherQuestion !== question) {
+                        otherQuestion.parentElement.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Слайдер отзывов
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial-card');
+        const dots = document.querySelectorAll('.testimonial-dot');
+        const testimonialContainer = document.querySelector('.testimonials-container');
+        
+        function showTestimonial(index) {
+            testimonials.forEach((testimonial, i) => {
+                if (i === index) {
+                    testimonial.style.opacity = '1';
+                    dots[i].classList.add('active');
+                } else {
+                    testimonial.style.opacity = '0.5';
+                    dots[i].classList.remove('active');
+                }
+            });
+            
+            testimonialContainer.scrollTo({
+                left: index * (testimonials[0].offsetWidth + 32),
+                behavior: 'smooth'
+            });
+        }
+        
+        document.querySelector('.testimonial-next').addEventListener('click', () => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        });
+        
+        document.querySelector('.testimonial-prev').addEventListener('click', () => {
+            currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        });
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentTestimonial = index;
+                showTestimonial(currentTestimonial);
+            });
+        });
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', () => {
+            showTestimonial(0);
+        });
+    </script>
+</body>
+</html>
